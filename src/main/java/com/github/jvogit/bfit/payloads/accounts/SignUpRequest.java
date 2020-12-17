@@ -1,4 +1,4 @@
-package com.github.jvogit.bfit.payloads;
+package com.github.jvogit.bfit.payloads.accounts;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

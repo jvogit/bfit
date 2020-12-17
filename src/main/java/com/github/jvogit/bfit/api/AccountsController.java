@@ -12,15 +12,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.github.jvogit.bfit.models.User;
+import com.github.jvogit.bfit.models.accounts.User;
 import com.github.jvogit.bfit.payloads.ApiResponse;
-import com.github.jvogit.bfit.payloads.SignUpRequest;
+import com.github.jvogit.bfit.payloads.accounts.SignUpRequest;
 import com.github.jvogit.bfit.repository.UserRepository;
 
 @RestController
 @RequestMapping("/api/accounts")
-public class AccountsApi {
+public class AccountsController {
     
+    @Autowired
     AuthenticationManager authManager;
     
     @Autowired

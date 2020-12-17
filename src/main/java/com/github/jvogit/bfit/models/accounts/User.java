@@ -1,4 +1,4 @@
-package com.github.jvogit.bfit.models;
+package com.github.jvogit.bfit.models.accounts;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -52,6 +52,5 @@ public class User extends DateAudit {
     @NonNull
     @Size(max = 100)
     private String password;
-    
     
 }
