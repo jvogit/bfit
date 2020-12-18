@@ -1,4 +1,4 @@
-package com.github.jvogit.bfit.api;
+package com.github.jvogit.bfit.controllers.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

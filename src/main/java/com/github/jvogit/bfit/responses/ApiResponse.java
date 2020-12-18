@@ -1,11 +1,12 @@
-package com.github.jvogit.bfit.payloads;
+package com.github.jvogit.bfit.responses;
 
+import org.springframework.http.HttpStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
 public class ApiResponse {
-    private boolean success;
+    private HttpStatus status;
     private String message;
 }
