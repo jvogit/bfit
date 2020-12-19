@@ -3,7 +3,6 @@ package com.github.jvogit.bfit.jwt;
 import java.security.Key;
 import java.util.Date;
 import javax.crypto.spec.SecretKeySpec;
-import javax.xml.bind.DatatypeConverter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
@@ -29,7 +28,7 @@ public class JwtTokenProvider {
     private Key getKey() {
         SignatureAlgorithm algo = SignatureAlgorithm.HS512;
 
-        byte[] secret = DatatypeConverter.parseBase64Binary(jwtSecret);
+        byte[] secret = jwtSecret.getBytes();
 
         return new SecretKeySpec(secret, algo.getJcaName());
     }

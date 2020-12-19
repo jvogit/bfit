@@ -17,12 +17,12 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.NaturalId;
 import com.github.jvogit.bfit.models.audits.DateAudit;
 import com.github.jvogit.bfit.models.roles.Role;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
-@Data
-@EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name = "users", uniqueConstraints = {
         @UniqueConstraint(columnNames = {
@@ -32,6 +32,10 @@ import lombok.NonNull;
                 "email"
         })
 })
+@Getter
+@Setter
+@RequiredArgsConstructor
+@NoArgsConstructor
 public class User extends DateAudit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

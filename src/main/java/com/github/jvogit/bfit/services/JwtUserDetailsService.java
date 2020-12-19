@@ -22,7 +22,6 @@ public class JwtUserDetailsService implements UserDetailsService {
                     return new UsernameNotFoundException(
                             "Unable to find user with id : " + loginUsername);
                 });
-
         return JwtUserDetails.create(user);
     }
 

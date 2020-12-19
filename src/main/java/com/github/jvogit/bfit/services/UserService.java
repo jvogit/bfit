@@ -1,32 +1,75 @@
 package com.github.jvogit.bfit.services;
 
+import java.util.Collections;
+import java.util.Set;
 import javax.validation.constraints.Email;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import com.github.jvogit.bfit.exceptions.accounts.UserServiceException;
+import com.github.jvogit.bfit.exceptions.accounts.BadRequestException;
+import com.github.jvogit.bfit.jwt.JwtTokenProvider;
 import com.github.jvogit.bfit.models.accounts.User;
+import com.github.jvogit.bfit.models.roles.Role;
+import com.github.jvogit.bfit.models.roles.RoleName;
+import com.github.jvogit.bfit.payloads.accounts.LoginRequest;
+import com.github.jvogit.bfit.payloads.accounts.SignUpRequest;
+import com.github.jvogit.bfit.repository.RoleRepository;
 import com.github.jvogit.bfit.repository.UserRepository;
 
 @Service
 public class UserService {
+
     @Autowired
-    UserRepository userRepository;
-    
-    public void createUser(User user) throws UserServiceException {
-        if (exists(user)) throw new UserServiceException("User already exists!");
+    private UserRepository userRepository;
+
+    @Autowired
+    private RoleRepository roleRepository;
+
+    @Autowired
+    private AuthenticationManager authManager;
+
+    @Autowired
+    private JwtTokenProvider jwtTokenProvider;
+
+    @Autowired
+    private PasswordEncoder pwdEncoder;
+
+    public void createUser(SignUpRequest request) throws BadRequestException {
+        User user = new User(request.getName(), request.getUsername(), request.getEmail(),
+                pwdEncoder.encode(request.getPassword()));
+        Set<Role> roles = Collections.singleton(roleRepository.findByName(RoleName.ROLE_USER)
+                .orElseThrow(() -> new BadRequestException("Unable to add default role!")));
+        user.setRoles(roles);
+        
+        if (exists(user))
+            throw new BadRequestException("User already exists!");
+        
         userRepository.save(user);
     }
-    
+
+    public String authenticate(LoginRequest request) {
+        Authentication auth = authManager.authenticate(new UsernamePasswordAuthenticationToken(
+                request.getUsername(), request.getPassword()));
+
+        SecurityContextHolder.getContext().setAuthentication(auth);
+
+        return jwtTokenProvider.generateToken(auth);
+    }
+
     public boolean exists(User user) {
         return existsByUsername(user.getUsername()) || existsByEmail(user.getEmail());
     }
-    
+
     public boolean existsByUsername(String name) {
         return userRepository.existsByUsername(name);
     }
-    
+
     public boolean existsByEmail(@Email String email) {
         return userRepository.existsByEmail(email);
     }
-    
+
 }
