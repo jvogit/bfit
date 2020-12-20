@@ -50,4 +50,9 @@ public class RESTExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<?> handleBadRequest(BadRequestException ex) {
         return ResponseEntity.badRequest().body(new ApiError(HttpStatus.BAD_REQUEST, ex.getMessage()));
     }
+    
+    @ExceptionHandler(Exception.class)
+    protected ResponseEntity<?> handleBadRequest(Exception ex) {
+        return ResponseEntity.badRequest().body(new ApiError(HttpStatus.BAD_REQUEST, ex.getMessage()));
+    }
 }

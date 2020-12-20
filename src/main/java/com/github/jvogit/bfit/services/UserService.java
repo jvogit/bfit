@@ -2,6 +2,7 @@ package com.github.jvogit.bfit.services;
 
 import java.util.Collections;
 import java.util.Set;
+import javax.transaction.Transactional;
 import javax.validation.constraints.Email;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,6 +20,7 @@ import com.github.jvogit.bfit.payloads.accounts.LoginRequest;
 import com.github.jvogit.bfit.payloads.accounts.SignUpRequest;
 import com.github.jvogit.bfit.repository.RoleRepository;
 import com.github.jvogit.bfit.repository.UserRepository;
+import com.github.jvogit.bfit.responses.accounts.LoginResponse;
 
 @Service
 public class UserService {
@@ -50,14 +52,15 @@ public class UserService {
         
         userRepository.save(user);
     }
-
-    public String authenticate(LoginRequest request) {
+    
+    @Transactional
+    public LoginResponse authenticate(LoginRequest request) {
         Authentication auth = authManager.authenticate(new UsernamePasswordAuthenticationToken(
                 request.getUsername(), request.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(auth);
 
-        return jwtTokenProvider.generateToken(auth);
+        return new LoginResponse(auth.getPrincipal(), jwtTokenProvider.generateToken(auth));
     }
 
     public boolean exists(User user) {

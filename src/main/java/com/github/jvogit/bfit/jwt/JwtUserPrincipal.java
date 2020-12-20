@@ -13,7 +13,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class JwtUserDetails implements UserDetails {
+public class JwtUserPrincipal implements UserDetails {
 
     private Long id;
     private String username;
@@ -46,12 +46,12 @@ public class JwtUserDetails implements UserDetails {
         return true;
     }
 
-    public static JwtUserDetails create(User user) {
+    public static JwtUserPrincipal create(User user) {
         List<GrantedAuthority> authorities = user.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName().name()))
                 .collect(Collectors.toList());
 
-        return new JwtUserDetails(user.getId(), user.getUsername(), user.getName(), user.getEmail(),
+        return new JwtUserPrincipal(user.getId(), user.getUsername(), user.getName(), user.getEmail(),
                 user.getPassword(), authorities);
     }
 
