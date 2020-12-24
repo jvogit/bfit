@@ -1,6 +1,5 @@
 package com.github.jvogit.bfit.responses.accounts;
 
-import com.github.jvogit.bfit.jwt.JwtUserPrincipal;
 import com.github.jvogit.bfit.responses.jwt.TokenResponse;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

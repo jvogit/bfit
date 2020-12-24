@@ -83,8 +83,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .permitAll()
                 .antMatchers(HttpMethod.GET, "/api/roles/**")
                     .permitAll()
+                .antMatchers("/api/**")
+                    .authenticated()
                 .anyRequest()
-                    .authenticated();
+                    .permitAll();
         
         http.addFilterBefore(authenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }

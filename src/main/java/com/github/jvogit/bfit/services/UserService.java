@@ -40,7 +40,7 @@ public class UserService {
     @Autowired
     private PasswordEncoder pwdEncoder;
 
-    public void createUser(SignUpRequest request) throws BadRequestException {
+    public User createUser(SignUpRequest request) throws BadRequestException {
         User user = new User(request.getName(), request.getUsername(), request.getEmail(),
                 pwdEncoder.encode(request.getPassword()));
         Set<Role> roles = Collections.singleton(roleRepository.findByName(RoleName.ROLE_USER)
@@ -51,6 +51,8 @@ public class UserService {
             throw new BadRequestException("User already exists!");
         
         userRepository.save(user);
+        
+        return user;
     }
     
     @Transactional
