@@ -23,6 +23,7 @@ import com.github.jvogit.bfit.repository.UserRepository;
 import com.github.jvogit.bfit.responses.accounts.LoginResponse;
 
 @Service
+@Transactional 
 public class UserService {
 
     @Autowired
@@ -55,7 +56,6 @@ public class UserService {
         return user;
     }
     
-    @Transactional
     public LoginResponse authenticate(LoginRequest request) {
         Authentication auth = authManager.authenticate(new UsernamePasswordAuthenticationToken(
                 request.getUsername(), request.getPassword()));
