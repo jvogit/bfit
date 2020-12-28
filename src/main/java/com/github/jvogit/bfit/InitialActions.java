@@ -65,7 +65,7 @@ public class InitialActions {
     
     void addCalorieRecords(Long user_id) {
         CalorieItem item1 = new CalorieItem("Apple", 100), item2 = new CalorieItem("Banana", 200);
-        CalorieRecord record = new CalorieRecord(user_id, new Date(2020 - 1900, 11, 25), Collections.emptySet());
+        CalorieRecord record = new CalorieRecord(user_id, new Date(1609154900000l), Collections.emptySet());
         record.addItem(item1);
         record.addItem(item2);
         

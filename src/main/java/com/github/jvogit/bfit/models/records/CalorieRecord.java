@@ -35,7 +35,7 @@ public class CalorieRecord {
     @Column(name = "user_id")
     private Long userId;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
     @JsonIgnore
     private User user;

@@ -8,5 +8,6 @@ import com.github.jvogit.bfit.models.records.CalorieRecord;
 
 @Repository
 public interface CalorieRecordRepository extends JpaRepository<CalorieRecord, Long> {
-    List<CalorieRecord> findAllByUserIdAndDateBetween(Long id, Date first, Date second);
+    List<CalorieRecord> findAllByUserIdAndDateBetween(Long user_id, Date first, Date second);
+    CalorieRecord findByUserIdAndDate(Long user_id, Date date);
 }
