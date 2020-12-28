@@ -16,8 +16,8 @@ import com.github.jvogit.bfit.jwt.JwtTokenProvider;
 import com.github.jvogit.bfit.models.accounts.User;
 import com.github.jvogit.bfit.models.roles.Role;
 import com.github.jvogit.bfit.models.roles.RoleName;
-import com.github.jvogit.bfit.payloads.accounts.LoginRequest;
-import com.github.jvogit.bfit.payloads.accounts.SignUpRequest;
+import com.github.jvogit.bfit.payloads.accounts.LoginBody;
+import com.github.jvogit.bfit.payloads.accounts.SignUpBody;
 import com.github.jvogit.bfit.repository.RoleRepository;
 import com.github.jvogit.bfit.repository.UserRepository;
 import com.github.jvogit.bfit.responses.accounts.LoginResponse;
@@ -41,7 +41,7 @@ public class UserService {
     @Autowired
     private PasswordEncoder pwdEncoder;
 
-    public User createUser(SignUpRequest request) throws BadRequestException {
+    public User createUser(SignUpBody request) throws BadRequestException {
         User user = new User(request.getName(), request.getUsername(), request.getEmail(),
                 pwdEncoder.encode(request.getPassword()));
         Set<Role> roles = Collections.singleton(roleRepository.findByName(RoleName.ROLE_USER)
@@ -56,7 +56,7 @@ public class UserService {
         return user;
     }
     
-    public LoginResponse authenticate(LoginRequest request) {
+    public LoginResponse authenticate(LoginBody request) {
         Authentication auth = authManager.authenticate(new UsernamePasswordAuthenticationToken(
                 request.getUsername(), request.getPassword()));
 

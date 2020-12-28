@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.github.jvogit.bfit.jwt.JwtUserPrincipal;
-import com.github.jvogit.bfit.payloads.accounts.LoginRequest;
-import com.github.jvogit.bfit.payloads.accounts.SignUpRequest;
+import com.github.jvogit.bfit.payloads.accounts.LoginBody;
+import com.github.jvogit.bfit.payloads.accounts.SignUpBody;
 import com.github.jvogit.bfit.responses.ApiResponse;
 import com.github.jvogit.bfit.responses.accounts.LoginResponse;
 import com.github.jvogit.bfit.responses.accounts.UserAvailability;
@@ -28,14 +28,14 @@ public class AccountsController {
     private UserService userService;
     
     @PostMapping("/signup")
-    public ApiResponse signup(@Valid @RequestBody SignUpRequest body) {
+    public ApiResponse signup(@Valid @RequestBody SignUpBody body) {
         userService.createUser(body);
         
         return new ApiResponse(HttpStatus.OK, "Registration success!");
     }
     
     @PostMapping("/login")
-    public LoginResponse login(@Valid @RequestBody LoginRequest body) {
+    public LoginResponse login(@Valid @RequestBody LoginBody body) {
         return userService.authenticate(body);
     }
     

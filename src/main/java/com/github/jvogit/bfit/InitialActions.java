@@ -14,7 +14,7 @@ import com.github.jvogit.bfit.models.counts.CalorieRecord;
 import com.github.jvogit.bfit.models.counts.calorie.CalorieItem;
 import com.github.jvogit.bfit.models.roles.Role;
 import com.github.jvogit.bfit.models.roles.RoleName;
-import com.github.jvogit.bfit.payloads.accounts.SignUpRequest;
+import com.github.jvogit.bfit.payloads.accounts.SignUpBody;
 import com.github.jvogit.bfit.repository.CalorieRecordRepository;
 import com.github.jvogit.bfit.repository.RoleRepository;
 import com.github.jvogit.bfit.repository.UserRepository;
@@ -52,7 +52,7 @@ public class InitialActions {
     }
     
     User addAdminUser() {
-        var admin = new SignUpRequest("Joe Admin", "admin123", "admin@bfit.com", "admin123");
+        var admin = new SignUpBody("Joe Admin", "admin123", "admin@bfit.com", "admin123");
         var user = userService.createUser(admin);
         Set<Role> roles = Stream.of(RoleName.values())
                 .map(r -> roleRepository.findByName(r).get())
