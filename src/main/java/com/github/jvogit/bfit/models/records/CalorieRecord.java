@@ -1,6 +1,6 @@
 package com.github.jvogit.bfit.models.records;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -40,7 +40,7 @@ public class CalorieRecord {
     @JsonIgnore
     private User user;
     
-    private Date date;
+    private LocalDate date;
     
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "record", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
@@ -51,7 +51,7 @@ public class CalorieRecord {
         item.setRecord(this);
     }
     
-    public CalorieRecord(Long userId, Date date, Set<CalorieItem> items) {
+    public CalorieRecord(Long userId, LocalDate date, Set<CalorieItem> items) {
         this.userId = userId;
         this.date = date;
         this.items = new HashSet<>();

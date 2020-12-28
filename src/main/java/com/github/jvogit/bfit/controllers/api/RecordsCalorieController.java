@@ -1,5 +1,6 @@
 package com.github.jvogit.bfit.controllers.api;
 
+import java.time.LocalDate;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class RecordsCalorieController {
 
     @GetMapping
     public List<CalorieRecord> get(@AuthenticationPrincipal JwtUserPrincipal userPrincipal,
-            @RequestParam(required = true) Long start, @RequestParam(required = true) Long end) {
-        return calorieRecordsService.findRecords(userPrincipal.getId(), start, end);
+            @RequestParam(required = true) String start, @RequestParam(required = true) String end) {
+        return calorieRecordsService.findRecords(userPrincipal.getId(), LocalDate.parse(start), LocalDate.parse(end));
     }
 }

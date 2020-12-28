@@ -1,6 +1,6 @@
 package com.github.jvogit.bfit;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -65,7 +65,7 @@ public class InitialActions {
     
     void addCalorieRecords(Long user_id) {
         CalorieItem item1 = new CalorieItem("Apple", 100), item2 = new CalorieItem("Banana", 200);
-        CalorieRecord record = new CalorieRecord(user_id, new Date(1609154900000l), Collections.emptySet());
+        CalorieRecord record = new CalorieRecord(user_id, LocalDate.of(2020, 12, 28), Collections.emptySet());
         record.addItem(item1);
         record.addItem(item2);
         

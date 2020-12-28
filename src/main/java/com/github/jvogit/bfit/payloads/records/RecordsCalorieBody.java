@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 public class RecordsCalorieBody {
-    private Long timestamp;
+    private String date;
     private List<RecordsCalorieItem> items;
     
     @Data
