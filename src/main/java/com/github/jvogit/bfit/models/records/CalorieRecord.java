@@ -1,4 +1,4 @@
-package com.github.jvogit.bfit.models.counts;
+package com.github.jvogit.bfit.models.records;
 
 import java.sql.Date;
 import java.util.HashSet;
@@ -14,8 +14,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.github.jvogit.bfit.models.accounts.User;
-import com.github.jvogit.bfit.models.counts.calorie.CalorieItem;
+import com.github.jvogit.bfit.models.records.calorie.CalorieItem;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -29,13 +31,19 @@ public class CalorieRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
     @Column(name = "user_id")
     private Long userId;
+    
     @ManyToOne
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    @JsonIgnore
     private User user;
+    
     private Date date;
+    
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "record", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private Set<CalorieItem> items;
     
     public void addItem(CalorieItem item) {

@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.github.jvogit.bfit.models.counts.CalorieRecord;
-import com.github.jvogit.bfit.models.counts.calorie.CalorieItem;
+import com.github.jvogit.bfit.models.records.CalorieRecord;
+import com.github.jvogit.bfit.models.records.calorie.CalorieItem;
 import com.github.jvogit.bfit.payloads.records.RecordsCalorieBody;
 import com.github.jvogit.bfit.repository.CalorieRecordRepository;
 

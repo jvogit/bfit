@@ -24,7 +24,7 @@ import com.github.jvogit.bfit.services.JwtUserDetailsService;
 @EnableGlobalMethodSecurity(
         securedEnabled = true,
         jsr250Enabled = true,
-        prePostEnabled = true //
+        prePostEnabled = true
 )
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     

@@ -10,10 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import org.hibernate.annotations.NaturalId;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "roles")
+@NoArgsConstructor
 @Getter
 @Setter
 public class Role {
@@ -25,8 +27,6 @@ public class Role {
     @NaturalId
     @Column(length = 60)
     private RoleName name;
-    
-    public Role() {}
     
     public Role (RoleName name) {
         this.name = name;

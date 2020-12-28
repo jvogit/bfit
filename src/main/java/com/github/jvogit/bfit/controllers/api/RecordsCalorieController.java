@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.github.jvogit.bfit.jwt.JwtUserPrincipal;
-import com.github.jvogit.bfit.models.counts.CalorieRecord;
+import com.github.jvogit.bfit.models.records.CalorieRecord;
 import com.github.jvogit.bfit.payloads.records.RecordsCalorieBody;
 import com.github.jvogit.bfit.responses.ApiResponse;
 import com.github.jvogit.bfit.responses.ApiSuccess;

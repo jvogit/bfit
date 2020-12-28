@@ -15,12 +15,11 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import org.hibernate.annotations.NaturalId;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.jvogit.bfit.models.audits.DateAudit;
 import com.github.jvogit.bfit.models.roles.Role;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @Entity
@@ -32,35 +31,32 @@ import lombok.Setter;
                 "email"
         })
 })
+@NoArgsConstructor
 @Getter
 @Setter
-@RequiredArgsConstructor
-@NoArgsConstructor
 public class User extends DateAudit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank
-    @NonNull
     @Size(max = 40)
     private String name;
 
     @NotBlank
-    @NonNull
     @Size(max = 15)
     private String username;
 
     @NaturalId
     @NotBlank
-    @NonNull
     @Size(max = 40)
     @Email
+    @JsonIgnore
     private String email;
 
     @NotBlank
-    @NonNull
     @Size(max = 100)
+    @JsonIgnore
     private String password;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -70,5 +66,12 @@ public class User extends DateAudit {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Role> roles;
+    
+    public User(String name, String username, String email, String password) {
+        this.name = name;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
 
 }

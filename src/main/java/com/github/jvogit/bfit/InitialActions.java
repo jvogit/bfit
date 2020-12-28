@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import com.github.jvogit.bfit.models.accounts.User;
-import com.github.jvogit.bfit.models.counts.CalorieRecord;
-import com.github.jvogit.bfit.models.counts.calorie.CalorieItem;
+import com.github.jvogit.bfit.models.records.CalorieRecord;
+import com.github.jvogit.bfit.models.records.calorie.CalorieItem;
 import com.github.jvogit.bfit.models.roles.Role;
 import com.github.jvogit.bfit.models.roles.RoleName;
 import com.github.jvogit.bfit.payloads.accounts.SignUpBody;
@@ -65,7 +65,7 @@ public class InitialActions {
     
     void addCalorieRecords(Long user_id) {
         CalorieItem item1 = new CalorieItem("Apple", 100), item2 = new CalorieItem("Banana", 200);
-        CalorieRecord record = new CalorieRecord(user_id, new Date(2020, 10, 10), Collections.emptySet());
+        CalorieRecord record = new CalorieRecord(user_id, new Date(2020 - 1900, 11, 25), Collections.emptySet());
         record.addItem(item1);
         record.addItem(item2);
         
