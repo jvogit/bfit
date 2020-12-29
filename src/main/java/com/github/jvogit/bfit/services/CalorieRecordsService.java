@@ -17,17 +17,20 @@ import com.github.jvogit.bfit.repository.CalorieRecordRepository;
 public class CalorieRecordsService {
     @Autowired
     private CalorieRecordRepository calorieRecordRepo;
-    
+
     public CalorieRecord createRecord(Long user_id, RecordsCalorieBody body) {
+        var date = LocalDate.parse(body.getDate());
         Set<CalorieItem> items = body.getItems().stream()
                 .map(item -> new CalorieItem(item.getName(), item.getCalories()))
                 .collect(Collectors.toSet());
-        CalorieRecord record = new CalorieRecord(user_id, LocalDate.parse(body.getDate()), items);
-        calorieRecordRepo.save(record);
-        
-        return record;
+        CalorieRecord record = new CalorieRecord(user_id, date, items);
+        calorieRecordRepo.findByUserIdAndDate(user_id, date)
+                .map(CalorieRecord::getId)
+                .ifPresent(record::setId);
+
+        return calorieRecordRepo.save(record);
     }
-    
+
     public List<CalorieRecord> findRecords(Long user_id, LocalDate start, LocalDate end) {
         return calorieRecordRepo.findAllByUserIdAndDateBetween(user_id, start, end);
     }
