@@ -12,6 +12,11 @@ Before starting to develop run `gradlew bootJar`
 
 Find the app at `localhost:3000` and frontend changes there
 
+## Extra
+- [baseweb](https://baseweb.design/)
+- [redux](https://www.youtube.com/watch?v=FqSabub_yNI)
+- [react redux saga](https://www.youtube.com/watch?v=1K26DIKt3w8)
+
 ## Environment variables used in production deployment
 Environment needed during deployment such as heroku
 - `JDBC_DATABASE_URL`
