@@ -5,6 +5,7 @@ import { DatePicker } from "baseui/datepicker";
 import { Button, KIND } from "baseui/button";
 import { Delete, Plus } from "baseui/icon";
 import { createRecord } from "services/records/CalorieRecordsService";
+import { useHistory } from "react-router";
 
 const CreateItem = ({ onClick }) => {
   return (
@@ -83,12 +84,14 @@ const fakeData = [
 export default ({ initialDate, initialItems }) => {
   const [items, setItems] = useState(fakeData);
   const [date, setDate] = useState(new Date());
+  const history = useHistory();
 
   const onSubmit = (e) => {
     e.preventDefault();
     createRecord(date.toLocaleDateString("en-CA"), items)
     .then(response => {
       console.log(response);
+      history.push("/dashboard");
     });
   }
 

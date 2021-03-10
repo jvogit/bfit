@@ -4,6 +4,8 @@ import {
   TableBuilder,
   TableBuilderColumn,
 } from 'baseui/table-semantic';
+import { Button } from "baseui/button";
+import { useHistory } from "react-router";
 
 const Title = (data) => {
   return (
@@ -30,9 +32,12 @@ const Title = (data) => {
 }
 
 export default ({ data }) => {
+
+  const history = useHistory();
+
   if (!data) {
     return (
-      <StatefulPanel title="No data!" />
+      <StatefulPanel title="No data!"/>
     )
   }
   return (
