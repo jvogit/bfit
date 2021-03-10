@@ -24,6 +24,9 @@ Note: Above three automatically set by heroku by adding postgresql addon
 - `JWT_EXPIRE_MS` (amount of time in milliseconds when an auth token expires)
 - `buildType` (buildType usually `prod` for deployment)
 
+Note: `prod` must be set when running jar (see `Procfile`)
+- `java -Dspring.profiles.active=prod -jar build/libs/jarFile.jar`
+
 ## Extra parameters
 1. `gradlew bootRun -PskipNpm` - Skips frontend build
 2. `gradlew bootRun -PbuildType=dev` - buildType: `prod` or `dev` (default)
